@@ -48,7 +48,6 @@
     "angular-route": "./vendor/angular-route/angular-route.js"
   },
   "scripts": {
-    "postinstall": "node_modules/.bin/webdriver-manager update && node_modules/.bin/bower install",
-    "test": "./node_modules/.bin/gulp test:unit"
+    "postinstall": "node_modules/.bin/webdriver-manager update && node_modules/.bin/bower install"
   }
 }

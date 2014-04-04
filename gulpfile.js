@@ -48,8 +48,10 @@ gulp.task('test:unit', function () {
 gulp.task('test:e2e', function () {
   var server = http.createServer(
     ecstatic({ root: 'dist/' })
-  ).listen(8000);
-  sleep.sleep(3);
+  );
+  server.on('error', function (e) { console.log(e); });
+  server.listen(8000, 'localhost.com');
+  sleep.sleep(5);
   return gulp.src(files.e2e)
         .pipe(protractor({
           configFile: 'protractor' + configPostfix + '.conf.js',
