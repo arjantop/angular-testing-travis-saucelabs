@@ -6,7 +6,7 @@ module.exports = function (config) {
   common(config);
 
   var sauceLabs = {
-    startConect: false,
+    startConnect: false,
     testName: 'Karma tests'
   };
 
