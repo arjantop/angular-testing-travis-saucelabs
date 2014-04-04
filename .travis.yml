@@ -1,7 +1,7 @@
 language: node_js
 node_js:
   - "0.12"
-test:
+script:
   - node test
   - "./node_modules/.bin/gulp test:e2e"
 addons:
