@@ -65,7 +65,7 @@ gulp.task('test:unit', function () {
 gulp.task('test:e2e', function () {
   var server = http.createServer(
     ecstatic({ root: 'dist/' })
-  ).listen(9999);
+  ).listen(8000);
   return gulp.src(files.e2e)
         .pipe(protractor({
           configFile: getProtractorConfig()

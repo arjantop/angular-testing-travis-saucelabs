@@ -22,7 +22,7 @@ exports.config = {
     }
   ],
 
-  baseUrl: 'http://localhost:' + (process.env.HTTP_PORT || '9999'),
+  baseUrl: 'http://localhost:' + (process.env.HTTP_PORT || '8000'),
 
   onPrepare: function() {},
 
