@@ -50,7 +50,7 @@ gulp.task('test:e2e', function () {
     ecstatic({ root: 'dist/' })
   );
   server.on('error', function (e) { console.log(e); });
-  server.listen(8000, 'localhost.com');
+  server.listen(8000, 'localhost');
   sleep.sleep(5);
   return gulp.src(files.e2e)
         .pipe(protractor({
