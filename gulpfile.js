@@ -38,7 +38,9 @@ function getKarmaConfig() {
 }
 
 function getProtractorConfig() {
-  if(useSaucelabs) {
+  if (process.env.TUNNEL_ID !== undefined) {
+    return 'protractor-saucelabs.conf.js';
+  } else if(useSaucelabs) {
     return 'protractor-travis.conf.js';
   } else {
     return 'protractor.conf.js';
