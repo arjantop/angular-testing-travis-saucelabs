@@ -16,7 +16,8 @@ var jshint = require('gulp-jshint'),
     protractor = require('gulp-protractor').protractor;
 
 var http = require('http'),
-    ecstatic = require('ecstatic');
+    ecstatic = require('ecstatic'),
+    sleep = require('sleep');
 
 var files = {
   js: [ 'src/app/app.js' ],
@@ -66,6 +67,7 @@ gulp.task('test:e2e', function () {
   var server = http.createServer(
     ecstatic({ root: 'dist/' })
   ).listen(8000);
+  sleep.sleep(3);
   return gulp.src(files.e2e)
         .pipe(protractor({
           configFile: getProtractorConfig()
@@ -126,6 +128,11 @@ gulp.task('html2js', function () {
 gulp.task('clean', function () {
   return gulp.src('dist', { read: false })
         .pipe(clean());
+});
+
+gulp.task('clean:all', ['clean'], function () {
+  return gulp.src(['node_modules', 'vendor'], { read: false })
+  .pipe(clean());
 });
 
 gulp.task('default', ['build'], function () {
