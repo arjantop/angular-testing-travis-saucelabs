@@ -24,7 +24,8 @@ module.exports = function(config) {
     autoWatch: false,
 
     sauceLabs: {
-      startConect: true,
+      startConect: false,
+      tunnelIdentifier: process.env.TRAVIS_JOB_NUMBER,
       testName: 'Karma tests'
     },
 

@@ -18,7 +18,8 @@ exports.config = {
     {
       'browserName': 'firefox',
       'name': testName,
-      'tunnel-identifier': process.env.TRAVIS_JOB_NUMBER
+      'tunnel-identifier': process.env.TRAVIS_JOB_NUMBER,
+      'build': process.env.TRAVIS_BUILD_NUMBER
     }
   ],
 
