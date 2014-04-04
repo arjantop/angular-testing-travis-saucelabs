@@ -28,25 +28,7 @@ var files = {
   vendor: [ 'vendor/**' ]
 };
 
-var useSaucelabs = process.env.SAUCE_USERNAME !== undefined;
-
-function getKarmaConfig() {
-  if(useSaucelabs) {
-    return 'karma-saucelabs.conf.js';
-  } else {
-    return 'karma.conf.js';
-  }
-}
-
-function getProtractorConfig() {
-  if (process.env.TUNNEL_ID !== undefined) {
-    return 'protractor-saucelabs.conf.js';
-  } else if(useSaucelabs) {
-    return 'protractor-travis.conf.js';
-  } else {
-    return 'protractor.conf.js';
-  }
-}
+var configPostfix = (process.env.SAUCE_USERNAME) ? '-saucelabs' : '';
 
 gulp.task('lint', function () {
   return gulp.src(files.unit)
@@ -57,7 +39,7 @@ gulp.task('lint', function () {
 gulp.task('test:unit', function () {
   return gulp.src(files.unit)
         .pipe(karma({
-          configFile: getKarmaConfig(),
+          configFile: 'karma' + configPostfix + '.conf.js',
           action: 'run'
         }))
         .on('error', function (err) { throw err; });
@@ -70,7 +52,7 @@ gulp.task('test:e2e', function () {
   sleep.sleep(3);
   return gulp.src(files.e2e)
         .pipe(protractor({
-          configFile: getProtractorConfig()
+          configFile: 'protractor' + configPostfix + '.conf.js',
         }))
         .on('error', function (err) {
           server.close();

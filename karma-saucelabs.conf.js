@@ -1,33 +1,25 @@
 'use strict';
 
-module.exports = function(config) {
+var common = require('./karma.common.js').config;
+
+module.exports = function (config) {
+  common(config);
+
+  var sauceLabs = {
+    startConect: false,
+    testName: 'Karma tests'
+  };
+
+  if(process.env.TRAVIS_JOB_NUMBER) {
+    sauceLabs.tunnelIdentifier = process.env.TRAVIS_JOB_NUMBER;
+  } else {
+    sauceLabs.startConnect = true;
+  }
+
   config.set({
-
-    frameworks: ['jasmine'],
-
-    files: [
-      'src/**/*.spec.js'
-    ],
-
-    // preprocess matching files before serving them to the browser
-    // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
-    preprocessors: {},
-
     reporters: ['dots', 'saucelabs'],
 
-    port: 9876,
-
-    colors: true,
-
-    logLevel: config.LOG_INFO,
-
-    autoWatch: false,
-
-    sauceLabs: {
-      startConect: false,
-      tunnelIdentifier: process.env.TRAVIS_JOB_NUMBER,
-      testName: 'Karma tests'
-    },
+    sauceLabs: sauceLabs,
 
     customLaunchers: {
       'SL_Chrome': {
@@ -61,8 +53,6 @@ module.exports = function(config) {
 
     browserDisconnectTolerance: 2,
 
-    browserNoActivityTimeout: 20000,
-
-    singleRun: false
+    browserNoActivityTimeout: 20000
   });
 };
